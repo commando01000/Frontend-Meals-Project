@@ -40,14 +40,15 @@ $(".btn-close").click(function (e) {
 });
 
 import { recipes } from "./recipes.js";
+import { RecipeDetails } from "./recipeDetails.js";
 
 let Recipes = new recipes();
 export let allRecipes;
 allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
 Recipes.displayMeals(allRecipes);
-
+let recipeDetails = new RecipeDetails(52977);
 $(".col-md-3").click(function (e) {
-  var nextMeal = $(this).find(".meal").data("id");
-  console.log(nextMeal);
+  var nextMeal_id = $(this).find(".meal").data("id");
+  $("#meals").hide();
 });
