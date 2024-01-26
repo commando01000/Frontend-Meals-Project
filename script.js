@@ -21,7 +21,7 @@ $(".toggle-button").click(function (e) {
   } else {
     $(".side-navbar").animate(
       {
-        left: -sideNavbarWidth - sidebarWidth + sideNavbarWidth,
+        left: -sideNavbarWidth - sideNavbarWidth + sideNavbarWidth,
       },
       1000
     );
