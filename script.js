@@ -16,7 +16,6 @@ $(".toggle-button").click(function (e) {
     );
     // $("").show();
     $(".sidebar ul").slideDown(1600, function () {});
-
   } else {
     $(".side-navbar").animate(
       {
@@ -46,3 +45,8 @@ let Recipes = new recipes();
 let allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
 Recipes.displayMeals(allRecipes);
+
+$(".col-md-3").click(function (e) {
+    var nextMeal = $(this).find(".meal").data('id');
+    console.log(nextMeal);
+  });
