@@ -42,11 +42,12 @@ $(".btn-close").click(function (e) {
 import { recipes } from "./recipes.js";
 
 let Recipes = new recipes();
-let allRecipes = await Recipes.getAllRecipes();
+export let allRecipes;
+allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
 Recipes.displayMeals(allRecipes);
 
 $(".col-md-3").click(function (e) {
-    var nextMeal = $(this).find(".meal").data('id');
-    console.log(nextMeal);
-  });
+  var nextMeal = $(this).find(".meal").data("id");
+  console.log(nextMeal);
+});
