@@ -70,8 +70,8 @@ export class Display {
     recipesDiv.innerHTML += "</ul>";
 
     const tagsDiv = document.querySelector(".col-md-8 .tags");
-    tagsDiv.innerHTML = `<button class="btn btn-success">Source</button>
-                        <button class="btn btn-danger">Youtube</button>`;
+    tagsDiv.innerHTML = `<a href="${meal.source}"><button class="btn btn-success">Source</button></a>
+                         <a href="${meal.youtube}"><button class="btn btn-danger">Youtube</button></a>`;
     let width = $("#meal-details").width();
     $(".btn-close").css("left", width + "px");
   }

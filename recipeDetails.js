@@ -13,7 +13,8 @@ export class RecipeDetails extends Display {
         this.instruction = allRecipes[i].strInstructions;
         this.area = allRecipes[i].strArea;
         this.category = allRecipes[i].strCategory;
-
+        this.youtube = allRecipes[i].strYoutube;
+        this.source = allRecipes[i].strSource;
         for (let j = 1; j <= 20; j++) {
           const ingredient = allRecipes[i][`strIngredient${j}`];
           const measure = allRecipes[i][`strMeasure${j}`];
