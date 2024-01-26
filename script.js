@@ -57,12 +57,18 @@ $(".col-md-3").click(function (e) {
   $("#meals").hide();
   $("#meal-details").removeClass("d-none");
   $("#meal-details").addClass("d-flex");
+  $("#meal-details").addClass("animate__backInDown");
   let recipe = new RecipeDetails(nextMeal_id);
   recipe.displayMeal(recipe);
 });
 
 $(".btn-close").click(function (e) { 
-  $("#meals").show();
   $("#meal-details").removeClass("d-flex");
-  $("#meal-details").addClass("d-none");
+  $("#meal-details").removeClass("animate__backInDown");
+  $("#meal-details").addClass("animate__backOutDown");
+  setTimeout(function () {
+    $("#meal-details").addClass("d-none");
+    $("#meals").show();
+    $("#meal-details").removeClass("animate__backOutDown");
+  }, 800);
 });
