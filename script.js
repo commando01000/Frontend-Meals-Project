@@ -20,7 +20,7 @@ $(".toggle-button").click(function (e) {
   } else {
     $(".side-navbar").animate(
       {
-        left: -sideNavbarWidth - sideNavbarWidth + sideNavbarWidth,
+        left: -sideNavbarWidth,
       },
       1000
     );
