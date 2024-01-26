@@ -55,12 +55,14 @@ Recipes.displayMeals(allRecipes);
 $(".col-md-3").click(function (e) {
   var nextMeal_id = $(this).find(".meal").data("id");
   $("#meals").hide();
-  $("#meal-details").show();
+  $("#meal-details").removeClass("d-none");
+  $("#meal-details").addClass("d-flex");
   let recipe = new RecipeDetails(nextMeal_id);
   recipe.displayMeal(recipe);
 });
 
 $(".btn-close").click(function (e) { 
   $("#meals").show();
-  $("#meal-details").hide();
+  $("#meal-details").removeClass("d-flex");
+  $("#meal-details").addClass("d-none");
 });
