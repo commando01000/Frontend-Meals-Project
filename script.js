@@ -4,9 +4,12 @@ var sidebarWidth = $(".sidebar").width();
 // console.log(sideNavbarWidth);
 // console.log(sidebarWidth);
 
-var isSidebarOpen = true;
 $(".sidebar ul").hide();
 $("#meal-details").hide();
+
+var isSidebarOpen = true;
+
+let x = $("body").width();
 
 $(".toggle-button").click(function (e) {
   if (isSidebarOpen) {

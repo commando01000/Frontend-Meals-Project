@@ -12,6 +12,21 @@ export class recipes extends Display {
         },
       }
     );
+    viewLoading();
+    function viewLoading() {
+      $(".loader").removeClass("d-none");
+      $(".loader").addClass("d-block");
+      console.log("GGGG");
+    }
+    if (response.ok) {
+      $(".loader").removeClass("d-block");
+      $(".loader").addClass("d-none");
+      console.log("Success");
+    } else {
+      $(".loader").removeClass("d-none");
+      $(".loader").addClass("d-block");
+      console.log("Error");
+    }
     const responseData = await response.json();
     return responseData.meals;
   }
