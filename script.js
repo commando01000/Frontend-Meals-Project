@@ -1,6 +1,5 @@
 var sideNavbarWidth = $(".side-navbar").outerWidth();
 var sidebarButtonLayer = $(".toggle-layer").width();
-var sidebarWidth = $(".sidebar").width();
 // console.log(sideNavbarWidth);
 // console.log(sidebarWidth);
 
