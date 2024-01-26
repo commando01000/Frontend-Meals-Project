@@ -45,5 +45,34 @@ export class Display {
     container.appendChild(row);
   }
 
-  displayMealByID(meal) {}
+  displayMealByID(meal) {
+    document.querySelector(".col-md-4 img").src = meal.image;
+    document.querySelector(".col-md-4 img").alt = meal.mealName;
+    document.querySelector(".col-md-4 h3").textContent = meal.mealName;
+    document.querySelector(
+      ".col-md-8 .instructions"
+    ).innerHTML = `<h2><strong>Instructions:</strong></h2> <p> <br> ${meal.instruction}</p> `;
+    document.querySelector(
+      ".col-md-8 .area"
+    ).innerHTML = `<h3> <strong>Area:</strong> ${meal.area} </h3>`;
+    document.querySelector(
+      ".col-md-8 .category"
+    ).innerHTML = `<h3> <strong>Category:</strong> ${meal.category} </h3>`;
+
+    const recipesDiv = document.querySelector(".col-md-8 .recipes");
+    recipesDiv.innerHTML = "<h3>Ingredients:</h3><ul>";
+    meal.ingredients.forEach((ingredient) => {
+      const recipeDiv = document.createElement("div");
+      recipeDiv.innerHTML = `<p>${ingredient}</p>`;
+      recipesDiv.appendChild(recipeDiv);
+    });
+    console.log(meal.ingredients);
+    recipesDiv.innerHTML += "</ul>";
+
+    const tagsDiv = document.querySelector(".col-md-8 .tags");
+    tagsDiv.innerHTML = `<button class="btn btn-success">Source</button>
+                        <button class="btn btn-danger">Youtube</button>`;
+    let width = $("#meal-details").width();
+    $(".btn-close").css("left", width + "px");
+  }
 }

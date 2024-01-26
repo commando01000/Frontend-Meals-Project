@@ -6,6 +6,8 @@ var sidebarWidth = $(".sidebar").width();
 
 var isSidebarOpen = true;
 $(".sidebar ul").hide();
+$("#meal-details").hide();
+
 $(".toggle-button").click(function (e) {
   if (isSidebarOpen) {
     $(".side-navbar").animate(
@@ -47,8 +49,18 @@ export let allRecipes;
 allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
 Recipes.displayMeals(allRecipes);
-let recipeDetails = new RecipeDetails(52977);
+// let recipeDetails = new RecipeDetails(52977);
+// console.log(recipeDetails);
+// recipeDetails.displayMeal(recipeDetails);
 $(".col-md-3").click(function (e) {
   var nextMeal_id = $(this).find(".meal").data("id");
   $("#meals").hide();
+  $("#meal-details").show();
+  let recipe = new RecipeDetails(nextMeal_id);
+  recipe.displayMeal(recipe);
+});
+
+$(".btn-close").click(function (e) { 
+  $("#meals").show();
+  $("#meal-details").hide();
 });

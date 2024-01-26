@@ -4,7 +4,7 @@ import { Display } from "./ui.js";
 export class RecipeDetails extends Display {
   constructor(id) {
     super();
-    const ingredients = [];
+    this.ingredients = [];
     for (var i = 0; i < allRecipes.length; i++) {
       if (allRecipes[i].idMeal == id) {
         this.index = id;
@@ -19,11 +19,15 @@ export class RecipeDetails extends Display {
           const measure = allRecipes[i][`strMeasure${j}`];
           if (ingredient && ingredient.trim() !== "") {
             const combined = `${measure.trim()} ${ingredient.trim()}`;
-            ingredients.push(combined);
+            this.ingredients.push(combined);
           }
         }
-        console.log(ingredients);
+        // console.log(this.ingredients);
       }
     }
+    return this;
+  }
+  displayMeal(meal){
+    this.displayMealByID(meal);
   }
 }
