@@ -42,9 +42,12 @@ $(".btn-close").click(function (e) {
 
 import { recipes } from "./recipes.js";
 import { RecipeDetails } from "./recipeDetails.js";
+import { Categories } from "./categories.js";
 
 let Recipes = new recipes();
+let categories = new Categories();
 export let allRecipes;
+export let allCategories;
 allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
 Recipes.displayMeals(allRecipes);
@@ -76,21 +79,39 @@ $(".btn-close").click(function (e) {
 
 let search = document.querySelector(".search");
 
-document.querySelector("a").addEventListener("click", function (e) {
-  if (e.target.text == "Search") {
-    search.classList.remove("d-none");
-    search.classList.add("d-flex");
-    $("#meals").hide();
-    $(".side-navbar").animate(
-      {
-        left: -sideNavbarWidth,
-      },
-      1000
-    );
-    // $("").hide();
-    $(".sidebar ul").slideUp(500, function () {});
-    isSidebarOpen = !isSidebarOpen;
-  }
+let navLinks = document.querySelectorAll("a");
+navLinks.forEach((link) => {
+  link.addEventListener("click", function (e) {
+    if (e.target.text == "Search") {
+      search.classList.remove("d-none");
+      search.classList.add("d-flex");
+      $("#meals").hide();
+      $(".side-navbar").animate(
+        {
+          left: -sideNavbarWidth,
+        },
+        1000
+      );
+      // $("").hide();
+      $(".sidebar ul").slideUp(500, function () {});
+      isSidebarOpen = !isSidebarOpen;
+      console.log(e.target.text);
+    }
+    if (e.target.text == "Categories") {
+      $("#meals").hide();
+      $(".side-navbar").animate(
+        {
+          left: -sideNavbarWidth,
+        },
+        1000
+      );
+      // $("").hide();
+      $(".sidebar ul").slideUp(500, function () {});
+      isSidebarOpen = !isSidebarOpen;
+      getAllCategories();
+      
+    }
+  });
 });
 
 $("#meal-name").keyup(function (e) {
@@ -128,9 +149,9 @@ $(".search").keydown(async function (e) {
 
 async function getMealsByName(mealName) {
   allRecipes = await Recipes.getRecipesByName(mealName);
-  console.log(allRecipes, "From Search !!!");
   Recipes.displayMeals(allRecipes);
   $("#meals").show();
+
   let searchwidth = $("#meals").width();
   $(".search").css("width", searchwidth + "px");
 
@@ -148,6 +169,7 @@ async function getMealsByName(mealName) {
 async function getMealsByFirstLetter(mealFirstLetter) {
   allRecipes = await Recipes.getRecipesByLetter(mealFirstLetter);
   Recipes.displayMeals(allRecipes);
+
   $("#meals").show();
 
   let searchwidth = $("#meals").width();
@@ -164,21 +186,27 @@ async function getMealsByFirstLetter(mealFirstLetter) {
   });
 }
 
-async function getMealsByCategory(Category) {
-  allRecipes = await Recipes.getRecipesByCategory(Category);
-  Recipes.displayMeals(allRecipes);
-  $("#meals").show();
+async function getAllCategories() {
+  allCategories = await categories.getCategories();
+  // console.log(await allCategories);
+  categories.displayCategories(allCategories);
 
-  let searchwidth = $("#meals").width();
-  $(".search").css("width", searchwidth + "px");
-
-  $(".col-md-3").click(function (e) {
-    var nextMeal_id = $(this).find(".meal").data("id");
-    $("#meals").hide();
-    $("#meal-details").removeClass("d-none");
-    $("#meal-details").addClass("d-flex");
-    $("#meal-details").addClass("animate__backInDown");
-    let recipe = new RecipeDetails(nextMeal_id);
-    recipe.displayMeal(recipe);
+  $(".col-md-3").click(async function (e) {
+    var category_name = $(this).find("h3").text();
+    // console.log(category_name);
+    allRecipes = await Recipes.getRecipesByCategory(category_name);
+    console.log(await allRecipes);
+    Recipes.displayMeals(allRecipes);
+    $("#categories").hide();
+    $("#meals").show();
+    $(".col-md-3").click(function (e) {
+      var nextMeal_id = $(this).find(".meal").data("id");
+      $("#meals").hide();
+      $("#meal-details").removeClass("d-none");
+      $("#meal-details").addClass("d-flex");
+      $("#meal-details").addClass("animate__backInDown");
+      let recipe = new RecipeDetails(nextMeal_id);
+      recipe.displayMeal(recipe);
+    });
   });
 }

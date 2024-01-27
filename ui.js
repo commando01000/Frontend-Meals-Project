@@ -34,7 +34,7 @@ export class Display {
         "text-black",
         "p-2"
       );
-      mealLayerElement.innerHTML = `<h3>${meal.strMeal}</h3>`; // Replace meal.name with the actual name of the meal
+      mealLayerElement.innerHTML = `<h3>${meal.strMeal}</h3>`;
 
       mealElement.appendChild(imgElement);
       mealElement.appendChild(mealLayerElement);
@@ -74,5 +74,53 @@ export class Display {
                          <a href="${meal.youtube}"><button class="btn btn-danger">Youtube</button></a>`;
     let width = $("#meal-details").width();
     $(".btn-close").css("left", width + "px");
+  }
+
+  displayAllCategories(categories) {
+    const container = document.querySelector("#categories .container"); // Assuming you have a container element in your HTML
+    container.innerHTML = ""; // Clear the existing content
+  
+    let row = document.createElement("div");
+    row.classList.add("row", "text-white", "gx-3", "gy-3");
+  
+    categories.forEach((category) => {
+      const col = document.createElement("div");
+      col.classList.add("col-md-3","overflow-hidden");
+  
+      const categoryElement = document.createElement("div");
+      categoryElement.classList.add(
+        "category",
+        "position-relative",
+        "overflow-hidden",
+        "rounded-2",
+        "cursor-pointer"
+      );
+      categoryElement.setAttribute("data-id", category.idCategory); 
+      const imgElement = document.createElement("img");
+      imgElement.classList.add("w-100");
+      imgElement.src = category.strCategoryThumb;
+      imgElement.alt = category.strCategory; 
+  
+      const categoryLayerElement = document.createElement("div");
+      categoryLayerElement.classList.add(
+        "category-layer",
+        "position-absolute",
+        "d-flex",
+        "flex-column",
+        "justify-content-center",
+        "align-items-center",
+        "text-black",
+        "p-2"
+      );
+      const categoryDescription = category.strCategoryDescription.split(' ').slice(0, 20).join(' ');
+      categoryLayerElement.innerHTML = `<h3>${category.strCategory}</h3> <p>${categoryDescription}</p>`;
+  
+      categoryElement.appendChild(imgElement);
+      categoryElement.appendChild(categoryLayerElement);
+      col.appendChild(categoryElement);
+      row.appendChild(col);
+    });
+  
+    container.appendChild(row);
   }
 }
