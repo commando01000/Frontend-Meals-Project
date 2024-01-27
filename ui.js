@@ -76,17 +76,48 @@ export class Display {
     $(".btn-close").css("left", width + "px");
   }
 
+  displayMealDetailsInCategoryByID(meal) {
+    document.querySelector(".col-md-4 img").src = meal.image;
+    document.querySelector(".col-md-4 img").alt = meal.mealName;
+    document.querySelector(".col-md-4 h3").textContent = meal.mealName;
+    document.querySelector(
+      ".col-md-8 .instructions"
+    ).innerHTML = `<h2><strong>Instructions:</strong></h2> <p> <br> ${meal.instruction}</p> `;
+    document.querySelector(
+      ".col-md-8 .area"
+    ).innerHTML = `<h3> <strong>Area:</strong> ${meal.area} </h3>`;
+    document.querySelector(
+      ".col-md-8 .category"
+    ).innerHTML = `<h3> <strong>Category:</strong> ${meal.category} </h3>`;
+
+    const recipesDiv = document.querySelector(".col-md-8 .recipes");
+    recipesDiv.innerHTML = "<h3>Ingredients:</h3><ul>";
+    // console.log(meal.ingredients);
+    meal.ingredients.forEach((ingredient) => {
+      const recipeDiv = document.createElement("div");
+      recipeDiv.innerHTML = `<p>${ingredient}</p>`;
+      recipesDiv.appendChild(recipeDiv);
+    });
+    recipesDiv.innerHTML += "</ul>";
+
+    const tagsDiv = document.querySelector(".col-md-8 .tags");
+    tagsDiv.innerHTML = `<a href="${meal.source}"><button class="btn btn-success">Source</button></a>
+                         <a href="${meal.youtube}"><button class="btn btn-danger">Youtube</button></a>`;
+    let width = $("#meal-details").width();
+    $(".btn-close").css("left", width + "px");
+  }
+
   displayAllCategories(categories) {
     const container = document.querySelector("#categories .container"); // Assuming you have a container element in your HTML
     container.innerHTML = ""; // Clear the existing content
-  
+
     let row = document.createElement("div");
     row.classList.add("row", "text-white", "gx-3", "gy-3");
-  
+
     categories.forEach((category) => {
       const col = document.createElement("div");
-      col.classList.add("col-md-3","overflow-hidden");
-  
+      col.classList.add("col-md-3", "overflow-hidden");
+
       const categoryElement = document.createElement("div");
       categoryElement.classList.add(
         "category",
@@ -95,12 +126,12 @@ export class Display {
         "rounded-2",
         "cursor-pointer"
       );
-      categoryElement.setAttribute("data-id", category.idCategory); 
+      categoryElement.setAttribute("data-id", category.idCategory);
       const imgElement = document.createElement("img");
       imgElement.classList.add("w-100");
       imgElement.src = category.strCategoryThumb;
-      imgElement.alt = category.strCategory; 
-  
+      imgElement.alt = category.strCategory;
+
       const categoryLayerElement = document.createElement("div");
       categoryLayerElement.classList.add(
         "category-layer",
@@ -112,15 +143,39 @@ export class Display {
         "text-black",
         "p-2"
       );
-      const categoryDescription = category.strCategoryDescription.split(' ').slice(0, 20).join(' ');
+      const categoryDescription = category.strCategoryDescription
+        .split(" ")
+        .slice(0, 20)
+        .join(" ");
       categoryLayerElement.innerHTML = `<h3>${category.strCategory}</h3> <p>${categoryDescription}</p>`;
-  
+
       categoryElement.appendChild(imgElement);
       categoryElement.appendChild(categoryLayerElement);
       col.appendChild(categoryElement);
       row.appendChild(col);
     });
-  
+
     container.appendChild(row);
+  }
+
+  displayAllAreas(areas) {
+    const areaContainer = document.querySelector("#area .container .row");
+    areaContainer.innerHTML = ""; // Clear the existing content
+  
+    areas.forEach(area => {
+      const col = document.createElement("div");
+      col.classList.add("col-md-4");
+  
+      const icon = document.createElement("i");
+      icon.classList.add("fa-solid", "fa-house-chimney");
+  
+      const areaName = document.createElement("div");
+      areaName.classList.add("area-name","text-white");
+      areaName.textContent = area.strArea; // Assuming area object has a 'name' property
+  
+      col.appendChild(icon);
+      col.appendChild(areaName);
+      areaContainer.appendChild(col);
+    });
   }
 }

@@ -125,3 +125,12 @@
 li a:hover {
   cursor: pointer;
 }
+
+#area i {
+  font-size: 60px;
+  color: white;
+}
+
+#area i:hover {
+  cursor: pointer;
+}

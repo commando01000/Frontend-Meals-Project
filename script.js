@@ -4,7 +4,8 @@ var sidebarButtonLayer = $(".toggle-layer").width();
 // console.log(sidebarWidth);
 
 $(".sidebar ul").hide();
-
+$("#categories").hide();
+$("#area").hide();
 var isSidebarOpen = true;
 
 $(".toggle-button").click(function (e) {
@@ -43,19 +44,31 @@ $(".btn-close").click(function (e) {
 import { recipes } from "./recipes.js";
 import { RecipeDetails } from "./recipeDetails.js";
 import { Categories } from "./categories.js";
+import { Area } from "./area.js";
 
 let Recipes = new recipes();
 let categories = new Categories();
+let area = new Area();
+
 export let allRecipes;
 export let allCategories;
+export let allAreas;
+export let recipe_details_by_category;
+
 allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
-Recipes.displayMeals(allRecipes);
+Recipes.displayMeals(await allRecipes);
+
+allAreas = await area.getAllAreas();
+console.log(await allAreas);
+
 let searchwidth = $("#meals").width();
 $(".search").css("width", searchwidth + "px");
+
 // let recipeDetails = new RecipeDetails(52977);
 // console.log(recipeDetails);
 // recipeDetails.displayMeal(recipeDetails);
+
 $(".col-md-3").click(function (e) {
   var nextMeal_id = $(this).find(".meal").data("id");
   $("#meals").hide();
@@ -99,6 +112,9 @@ navLinks.forEach((link) => {
     }
     if (e.target.text == "Categories") {
       $("#meals").hide();
+      search.classList.add("d-none");
+      search.classList.remove("d-flex");
+      $("#categories").show();
       $(".side-navbar").animate(
         {
           left: -sideNavbarWidth,
@@ -109,10 +125,36 @@ navLinks.forEach((link) => {
       $(".sidebar ul").slideUp(500, function () {});
       isSidebarOpen = !isSidebarOpen;
       getAllCategories();
-      
+    }
+    if (e.target.text == "Area") {
+      $("#meals").hide();
+      $("#categories").hide();
+      search.classList.add("d-none");
+      search.classList.remove("d-flex");
+      $("#area").show();
+      $(".side-navbar").animate(
+        {
+          left: -sideNavbarWidth,
+        },
+        1000
+      );
+      // $("").hide();
+      getAllAreas();
     }
   });
 });
+
+async function getAllAreas() {
+  allAreas = await area.getAllAreas();
+  area.displayAreas(await allAreas);
+  // console.log(await allAreas);
+  $("#area .col-md-4").click(function (e) { 
+    // console.log($(this).find(".area-name").text());
+    let area_name = $(this).find(".area-name").text();
+    
+    $("#area").hide();
+  });
+}
 
 $("#meal-name").keyup(function (e) {
   $(".spoiler").removeClass("d-block");
@@ -199,14 +241,24 @@ async function getAllCategories() {
     Recipes.displayMeals(allRecipes);
     $("#categories").hide();
     $("#meals").show();
-    $(".col-md-3").click(function (e) {
+    $(".col-md-3").click(async function (e) {
+      allRecipes = "";
       var nextMeal_id = $(this).find(".meal").data("id");
       $("#meals").hide();
       $("#meal-details").removeClass("d-none");
       $("#meal-details").addClass("d-flex");
       $("#meal-details").addClass("animate__backInDown");
-      let recipe = new RecipeDetails(nextMeal_id);
-      recipe.displayMeal(recipe);
+      let recipee = await Recipes.getRecipesByDetailsByID(nextMeal_id);
+      // console.log(recipee);
+      // console.log(recipee[0].idMeal);
+      // console.log(recipee[0]);
+      // console.log(allRecipes);
+      recipe_details_by_category = recipee;
+      let recipe_details = new RecipeDetails(recipee[0].idMeal);
+      // console.log(recipe_details);
+      recipe_details = recipe_details.setNewMealDetailsCategory();
+      recipe_details.displayMealDetailsInCategoryByID(recipe_details);
+      // console.log(recipe_details);
     });
   });
 }
