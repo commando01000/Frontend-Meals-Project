@@ -48,7 +48,8 @@
   top: 50vh;
   margin-top: -23.5px; /* Half of the height */
   margin-left: -23.5px; /* Half of the width */
-  z-index: 99999;
+  z-index: 999999;
+  transition: all 0.3s;
   /* height: 100vh; */
 }
 .loader:before,
@@ -60,7 +61,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  animation: mvx 1.2s infinite ease-in;
+  animation: mvx 1.2s infinite ease-in-out;
 }
 .loader:before {
   border-color: #fff #fff transparent transparent;
@@ -97,4 +98,12 @@
   100% {
     transform: translate(0, 0) rotate(180deg);
   }
+}
+
+.search {
+  min-width: 500px !important;
+}
+
+li a:hover {
+  cursor: pointer;
 }

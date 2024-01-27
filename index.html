@@ -33,19 +33,19 @@
       <div class="sidebar">
         <ul class="list-unstyled text-light p-5">
           <li>
-            <a class="text-light text-decoration-none" href="">Search</a>
+            <a class="text-light text-decoration-none">Search</a>
           </li>
           <li class="pt-3">
-            <a href="" class="text-light text-decoration-none">Categories</a>
+            <a class="text-light text-decoration-none">Categories</a>
           </li>
           <li class="pt-3">
-            <a href="" class="text-light text-decoration-none">Area</a>
+            <a class="text-light text-decoration-none">Area</a>
           </li>
           <li class="pt-3">
-            <a href="" class="text-light text-decoration-none">Ingredients</a>
+            <a class="text-light text-decoration-none">Ingredients</a>
           </li>
           <li class="pt-3">
-            <a href="" class="text-light text-decoration-none">Contact Us</a>
+            <a class="text-light text-decoration-none">Contact Us</a>
           </li>
         </ul>
       </div>
@@ -57,10 +57,41 @@
         </div>
       </div>
     </div>
-    <section id="meals" class="ms-5 mt-5 ps-5">
+    <div class="search position-fixed d-none flex-row flex-nowrap gap-3">
+      <div class="search-by-name w-50">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="meal-name"
+            aria-describedby="helpId"
+            placeholder="Search by name"
+          />
+        </div>
+      </div>
+      <div class="search-by-category w-50">
+        <div class="mb-3">
+          <label for="Category" class="form-label">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            name="category"
+            id="meal-letter"
+            aria-describedby="helpId"
+            placeholder="Search by first letter"
+          />
+        </div>
+        <p class="text-white spoiler d-block fw-bolder">
+          press Escape when focusing on the search input to cancel search
+        </p>
+      </div>
+    </div>
+    <section id="meals" class="ms-5 mt-5 pt-5 ps-5">
       <div class="container"></div>
     </section>
-    <section id="meal-details" class="mt-5 animate__animated d-none">
+    <section id="meal-details" class="mt-5 pt-5 animate__animated d-none">
       <button
         class="btn-close btn-close-white position-relative"
         id="btnClose"
