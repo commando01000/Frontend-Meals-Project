@@ -54,6 +54,7 @@ export let allRecipes;
 export let allCategories;
 export let allAreas;
 export let recipe_details_by_category;
+export let allAreaRecipes;
 
 allRecipes = await Recipes.getAllRecipes();
 console.log(await allRecipes);
@@ -148,10 +149,12 @@ async function getAllAreas() {
   allAreas = await area.getAllAreas();
   area.displayAreas(await allAreas);
   // console.log(await allAreas);
-  $("#area .col-md-4").click(function (e) { 
+  $("#area .col-md-4").click(async function (e) {
     // console.log($(this).find(".area-name").text());
     let area_name = $(this).find(".area-name").text();
-    
+
+    allAreaRecipes = await Recipes.getRecipesByArea(area_name);
+    console.log(await allAreaRecipes);
     $("#area").hide();
   });
 }
