@@ -69,6 +69,28 @@ export class RecipeDetails extends Display {
     }
     return this;
   }
+
+  setNewMealDetailsArea(meal) {
+    console.log(meal);
+    this.index = meal[0].idMeal;
+    this.mealName = meal[0].strMeal;
+    this.image = meal[0].strMealThumb;
+    this.instruction = meal[0].strInstructions;
+    this.area = meal[0].strArea;
+    this.category = meal[0].strCategory;
+    this.youtube = meal[0].strYoutube;
+    this.source = meal[0].strSource;
+    for (let j = 1; j <= 20; j++) {
+      const ingredient = meal[0][`strIngredient${j}`];
+      const measure = meal[0][`strMeasure${j}`];
+      if (ingredient && ingredient.trim() !== "") {
+        const combined = `${measure.trim()} ${ingredient.trim()}`;
+        this.ingredients.push(combined);
+      }
+    }
+    return this;
+  }
+  
   displayMeal(meal) {
     this.displayMealByID(meal);
   }

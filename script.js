@@ -155,6 +155,33 @@ async function getAllAreas() {
 
     allAreaRecipes = await Recipes.getRecipesByArea(area_name);
     console.log(await allAreaRecipes);
+
+    Recipes.displayMeals(allAreaRecipes);
+
+    console.log(allAreaRecipes);
+
+    $(".col-md-3").click(async function (e) {
+      var nextMeal_id = $(this).find(".meal").data("id");
+      $("#meals").hide();
+      $("#meal-details").removeClass("d-none");
+      $("#meal-details").addClass("d-flex");
+      $("#meal-details").addClass("animate__backInDown");
+      
+      let my_recipe = await Recipes.getRecipesByDetailsByID(nextMeal_id);
+
+      console.log(await my_recipe[0].idMeal);
+
+      let my_recipe_details = new RecipeDetails(-1);
+
+      my_recipe_details = my_recipe_details.setNewMealDetailsArea(await my_recipe);
+      my_recipe_details.displayMeal(my_recipe_details);
+
+      console.log(await my_recipe);
+      console.log(await my_recipe_details);
+
+    });
+
+    $("#meals").show();
     $("#area").hide();
   });
 }
