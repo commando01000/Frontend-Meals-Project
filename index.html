@@ -132,7 +132,98 @@
         </div>
       </div>
     </section>
-    
+    <section id="contact-us" class="mt-5 w-50 vh-100">
+      <div class="container text-center">
+        <div class="row gx-3 gy-4">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control mb-3"
+                name=""
+                id="username"
+                aria-describedby="helpId"
+                placeholder="Enter Your Name"
+              />
+              <input
+                type="text"
+                class="form-control mb-3"
+                name=""
+                id="phone"
+                aria-describedby="helpId"
+                placeholder="Enter Your Phone Number"
+              />
+              <div
+                id="phoneAlert"
+                class="alert alert-danger d-none w-100 mt-2 d-block"
+              >
+                Enter a valid Phone Number !
+              </div>
+              <input
+                type="password"
+                class="form-control mb-3"
+                name=""
+                id="password"
+                aria-describedby="helpId"
+                placeholder="Enter Your Password"
+              />
+              <div
+                id="passwordAlert"
+                class="alert alert-danger d-none w-100 mt-2 d-block"
+              >
+                Password must be at least 8 characters long and contain at least
+                one digit and one special character.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="email"
+              class="form-control mb-3"
+              name="email"
+              id="email"
+              aria-describedby="helpId"
+              placeholder="Enter Your Email"
+            />
+            <div
+              id="emailAlert"
+              class="alert alert-danger d-none w-100 mt-2 d-block"
+            >
+              Email not valid *exemple@yyy.zzz !
+            </div>
+            <input
+              type="number"
+              class="form-control mb-3"
+              name="age"
+              id="age"
+              aria-describedby="helpId"
+              placeholder="Enter Your Age"
+            />
+            <div
+              id="ageAlert"
+              class="alert alert-danger d-none w-100 mt-2 d-block"
+            >
+              Enter a valid age
+            </div>
+            <input
+              type="password"
+              class="form-control mb-3"
+              name="password"
+              id="re-password"
+              aria-describedby="helpId"
+              placeholder="Renter Your Password"
+            />
+            <div
+              id="re-passwordMatchAlert"
+              class="alert alert-danger d-none w-100 mt-2 d-block"
+            >
+              Password does not match ! 
+            </div>
+          </div>
+          <button class="btn btn-danger" type="button">Submit</button>
+        </div>
+      </div>
+    </section>
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="

@@ -5,6 +5,7 @@ var sidebarButtonLayer = $(".toggle-layer").width();
 
 $(".sidebar ul").hide();
 $("#categories").hide();
+$("#contact-us").hide();
 $("#area").hide();
 var isSidebarOpen = true;
 
@@ -142,6 +143,24 @@ navLinks.forEach((link) => {
       // $("").hide();
       getAllAreas();
     }
+    if (e.target.text == "Contact Us") {
+      $("#meals").hide();
+      $("#categories").hide();
+      $("#area").hide();
+      $("#meal-details").addClass("d-none");
+      $("#meal-details").removeClass("d-flex");
+      search.classList.add("d-none");
+      search.classList.remove("d-flex");
+
+      $(".side-navbar").animate(
+        {
+          left: -sideNavbarWidth,
+        },
+        1000
+      );
+      // $("").hide();
+      displayContactUsForm();
+    }
   });
 });
 
@@ -166,7 +185,7 @@ async function getAllAreas() {
       $("#meal-details").removeClass("d-none");
       $("#meal-details").addClass("d-flex");
       $("#meal-details").addClass("animate__backInDown");
-      
+
       let my_recipe = await Recipes.getRecipeByDetailsByID(nextMeal_id);
 
       console.log(await my_recipe[0].idMeal);
@@ -178,7 +197,6 @@ async function getAllAreas() {
 
       console.log(await my_recipe);
       console.log(await my_recipe_details);
-
     });
 
     $("#meals").show();
@@ -292,3 +310,152 @@ async function getAllCategories() {
     });
   });
 }
+
+function displayContactUsForm() {
+  $("#contact-us").show();
+  $("#contact-us").addClass("d-flex");
+  $("#contact-us").addClass("align-items-center");
+  $("#meals").hide();
+  $("#categories").hide();
+  $("#area").hide();
+  $("#meal-details").addClass("d-none");
+  $("#meal-details").removeClass("d-flex");
+  search.classList.add("d-none");
+  search.classList.remove("d-flex");
+}
+
+$("#email").keyup(function (e) {
+  var validRegexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+  var Email = $("#email").val();
+
+  var validEmail = validRegexEmail.test(Email);
+
+  if (!validEmail) {
+    $("#emailAlert").removeClass("d-none");
+    $("#emailAlert").addClass("d-block");
+  } else if (Email == "") {
+    $("#emailAlert").removeClass("d-block");
+    $("#emailAlert").addClass("d-none");
+  } else {
+    $("#emailAlert").addClass("d-none");
+    $("#emailAlert").removeClass("d-block");
+  }
+});
+
+$("#email").blur(function (e) {
+  var validRegexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+  var Email = $("#email").val();
+
+  console.log("GGGGGGG");
+
+  var validEmail = validRegexEmail.test(Email);
+
+  console.log(validEmail);
+
+  if (!validEmail) {
+    $("#emailAlert").removeClass("d-none");
+    $("#emailAlert").addClass("d-block");
+  } else if (Email == "") {
+    $("#emailAlert").removeClass("d-block");
+    $("#emailAlert").addClass("d-none");
+  } else {
+    $("#emailAlert").addClass("d-none");
+    $("#emailAlert").removeClass("d-block");
+  }
+});
+
+$("#phone").keyup(function (e) {
+  var validRegexPhone = /^01[0-2]\d{1,8}$/;
+
+  var Phone = $("#phone").val();
+
+  var validPhone = validRegexPhone.test(Phone);
+
+  console.log(validPhone);
+
+  if (!validPhone) {
+    $("#phoneAlert").removeClass("d-none");
+    $("#phoneAlert").addClass("d-block");
+  } else if (Phone == "") {
+    $("#phoneAlert").removeClass("d-block");
+    $("#phoneAlert").addClass("d-none");
+  } else {
+    $("#phoneAlert").addClass("d-none");
+    $("#phoneAlert").removeClass("d-block");
+  }
+});
+
+$("#phone").blur(function (e) {
+  var validRegexPhone = /^01[0-2]\d{1,8}$/;
+
+  var Phone = $("#phone").val();
+
+  var validPhone = validRegexPhone.test(Phone);
+
+  console.log(validPhone);
+
+  if (!validPhone) {
+    $("#phoneAlert").removeClass("d-none");
+    $("#phoneAlert").addClass("d-block");
+  } else if (Phone == "") {
+    $("#phoneAlert").removeClass("d-block");
+    $("#phoneAlert").addClass("d-none");
+  } else {
+    $("#phoneAlert").addClass("d-none");
+    $("#phoneAlert").removeClass("d-block");
+  }
+});
+
+$("#age").keyup(function (e) {
+  var age_regex = /^\S[0-9]{0,3}$/;
+
+  var Age = $("#age").val();
+
+  var validAge = age_regex.test(Age);
+
+  if (!validAge) {
+    $("#ageAlert").removeClass("d-none");
+    $("#ageAlert").addClass("d-block");
+  } else if (Age == "") {
+    $("#ageAlert").removeClass("d-block");
+    $("#ageAlert").addClass("d-none");
+  } else {
+    $("#ageAlert").addClass("d-none");
+    $("#ageAlert").removeClass("d-block");
+  }
+});
+
+$("#password").keyup(function (e) {
+  var validRegexPassword =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+  var password = $("#password").val();
+
+  var validPassword = validRegexPassword.test(password);
+
+  if (!validPassword) {
+    $("#passwordAlert").removeClass("d-none");
+    $("#passwordAlert").addClass("d-block");
+  } else if (password == "") {
+    $("#passwordAlert").removeClass("d-block");
+    $("#passwordAlert").addClass("d-none");
+  } else {
+    $("#passwordAlert").addClass("d-none");
+    $("#passwordAlert").removeClass("d-block");
+  }
+});
+
+$("#re-password").keyup(function (e) {
+  var password = $("#password").val();
+  var rePassword = $("#re-password").val();
+
+  if (rePassword !== password) {
+    $("#re-passwordMatchAlert").removeClass("d-none");
+    $("#re-passwordMatchAlert").addClass("d-block");
+  } else {
+    $("#re-passwordMatchAlert").addClass("d-none");
+    $("#re-passwordMatchAlert").removeClass("d-block");
+  }
+});
