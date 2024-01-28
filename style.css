@@ -126,6 +126,10 @@ li a:hover {
   cursor: pointer;
 }
 
+#ingredients .col-md-3:hover {
+  cursor: pointer;
+}
+
 #area i {
   font-size: 60px;
   color: white;

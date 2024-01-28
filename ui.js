@@ -161,21 +161,49 @@ export class Display {
   displayAllAreas(areas) {
     const areaContainer = document.querySelector("#area .container .row");
     areaContainer.innerHTML = ""; // Clear the existing content
-  
-    areas.forEach(area => {
+
+    areas.forEach((area) => {
       const col = document.createElement("div");
       col.classList.add("col-md-4");
-  
+
       const icon = document.createElement("i");
       icon.classList.add("fa-solid", "fa-house-chimney");
-  
+
       const areaName = document.createElement("div");
-      areaName.classList.add("area-name","text-white");
+      areaName.classList.add("area-name", "text-white");
       areaName.textContent = area.strArea; // Assuming area object has a 'name' property
-  
+
       col.appendChild(icon);
       col.appendChild(areaName);
       areaContainer.appendChild(col);
     });
+  }
+
+  displayAllIngredients(ingredients) {
+    const ingredientsSection = document.getElementById("ingredients");
+    const container = document.createElement("div");
+    container.classList.add("container", "d-flex","text-white", "text-center");
+    const row = document.createElement("div");
+    row.classList.add("row");
+
+    ingredients.forEach((ingredient) => {
+      const col = document.createElement("div");
+      col.classList.add("col-md-3");
+      const icon = document.createElement("i");
+      icon.classList.add("fa-solid", "fa-drumstick-bite", "fa-4x");
+      const heading = document.createElement("h3");
+      heading.textContent = ingredient.strIngredient; // Replace with the actual property of the ingredient
+      const paragraph = document.createElement("p");
+      const words = ingredient.strDescription.split(" ").slice(0, 20).join(" "); // Get the first 20 words
+      paragraph.textContent = words;
+
+      col.appendChild(icon);
+      col.appendChild(heading);
+      col.appendChild(paragraph);
+      row.appendChild(col);
+    });
+
+    container.appendChild(row);
+    ingredientsSection.appendChild(container);
   }
 }
