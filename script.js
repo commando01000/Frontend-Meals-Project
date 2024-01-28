@@ -116,6 +116,9 @@ navLinks.forEach((link) => {
       $("#meals").hide();
       search.classList.add("d-none");
       search.classList.remove("d-flex");
+      $("#contact-us").addClass("d-none");
+      $("#contact-us").removeClass("d-flex");
+      $("#area").hide();
       $("#categories").show();
       $(".side-navbar").animate(
         {
@@ -131,6 +134,8 @@ navLinks.forEach((link) => {
     if (e.target.text == "Area") {
       $("#meals").hide();
       $("#categories").hide();
+      $("#contact-us").addClass("d-none");
+      $("#contact-us").removeClass("d-flex");
       search.classList.add("d-none");
       search.classList.remove("d-flex");
       $("#area").show();
@@ -141,6 +146,7 @@ navLinks.forEach((link) => {
         1000
       );
       // $("").hide();
+      isSidebarOpen = !isSidebarOpen;
       getAllAreas();
     }
     if (e.target.text == "Contact Us") {
@@ -152,6 +158,9 @@ navLinks.forEach((link) => {
       search.classList.add("d-none");
       search.classList.remove("d-flex");
 
+      $("#contact-us").addClass("d-flex");
+      $("#contact-us").removeClass("d-none");
+
       $(".side-navbar").animate(
         {
           left: -sideNavbarWidth,
@@ -159,6 +168,7 @@ navLinks.forEach((link) => {
         1000
       );
       // $("").hide();
+      isSidebarOpen = !isSidebarOpen;
       displayContactUsForm();
     }
   });
