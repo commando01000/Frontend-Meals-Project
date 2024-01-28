@@ -122,6 +122,18 @@ navLinks.forEach((link) => {
       search.classList.remove("d-flex");
       $("#contact-us").addClass("d-none");
       $("#contact-us").removeClass("d-flex");
+
+      $("#meal-details").addClass("d-none");
+      $("#meal-details").removeClass("d-flex");
+
+      $("#area").addClass("d-none");
+      $("#area").removeClass("d-flex");
+
+      $("#ingredients").addClass("d-none");
+      $("#ingredients").removeClass("d-flex");
+      $("#categories").addClass("d-flex");
+      $("#categories").removeClass("d-none");
+      $("#ingredients").hide();
       $("#area").hide();
       $("#categories").show();
       $(".side-navbar").animate(
@@ -142,6 +154,17 @@ navLinks.forEach((link) => {
       $("#contact-us").removeClass("d-flex");
       search.classList.add("d-none");
       search.classList.remove("d-flex");
+      $("#area").removeClass("d-none");
+      $("#area").addClass("d-flex");
+      $("#meal-details").addClass("d-none");
+      $("#meal-details").removeClass("d-flex");
+      $("#ingredients").addClass("d-none");
+      $("#ingredients").removeClass("d-flex");
+
+      $("#categories").addClass("d-none");
+      $("#categories").removeClass("d-flex");
+
+      $("#ingredients").hide();
       $("#area").show();
       $(".side-navbar").animate(
         {
@@ -155,14 +178,21 @@ navLinks.forEach((link) => {
     }
     if (e.target.text == "Ingredients") {
       $("#meals").hide();
-      $("#categories").hide();
       $("#area").hide();
+      $("#area").remove("d-flex");
+      $("#area").addClass("d-none");
       $("#meal-details").addClass("d-none");
       $("#meal-details").removeClass("d-flex");
       search.classList.add("d-none");
       search.classList.remove("d-flex");
       $("#contact-us").remove("d-flex");
       $("#contact-us").addClass("d-none");
+      $("#categories").addClass("d-none");
+      $("#categories").removeClass("d-flex");
+
+      $("#ingredients").removeClass("d-none");
+      $("#ingredients").addClass("d-flex");
+
       $("#ingredients").show();
 
       $(".side-navbar").animate(
@@ -217,26 +247,25 @@ async function displayAllIngredients() {
     // console.log(await allRecipes);
     Recipes.displayMeals(allRecipes);
     $("#ingredients").hide();
+    $("#ingredients").removeClass("d-flex");
+    $("#ingredients").addClass("d-none");
     $("#meals").show();
-    // $(".col-md-3").click(async function (e) {
-    //   allRecipes = "";
-    //   var nextMeal_id = $(this).find(".meal").data("id");
-    //   $("#meals").hide();
-    //   $("#meal-details").removeClass("d-none");
-    //   $("#meal-details").addClass("d-flex");
-    //   $("#meal-details").addClass("animate__backInDown");
-    //   let recipee = await Recipes.getRecipeByDetailsByID(nextMeal_id);
-    //   // console.log(recipee);
-    //   // console.log(recipee[0].idMeal);
-    //   // console.log(recipee[0]);
-    //   // console.log(allRecipes);
-    //   recipe_details_by_category = recipee;
-    //   let recipe_details = new RecipeDetails(recipee[0].idMeal);
-    //   // console.log(recipe_details);
-    //   recipe_details = recipe_details.setNewMealDetailsCategory();
-    //   recipe_details.displayMealDetailsInCategoryByID(recipe_details);
-    //   // console.log(recipe_details);
-    // });
+    $(".col-md-3").click(async function (e) {
+      allRecipes = "";
+      var nextMeal_id = $(this).find(".meal").data("id");
+      console.log(nextMeal_id);
+      $("#meals").hide();
+
+      $("#meal-details").removeClass("d-none");
+      $("#meal-details").addClass("d-flex");
+      $("#meal-details").addClass("animate__backInDown");
+      let recipee = await Recipes.getRecipeByDetailsByID(nextMeal_id);
+      // console.log(await recipee);
+      let recipe_details = new RecipeDetails(-1);
+      recipe_details = recipe_details.setNewMealDetails(recipee);
+      // console.log(recipe_details);
+      recipe_details.displayMeal(recipe_details);
+    });
   });
 }
 
@@ -247,6 +276,9 @@ async function getAllAreas() {
   $("#area .col-md-4").click(async function (e) {
     // console.log($(this).find(".area-name").text());
     let area_name = $(this).find(".area-name").text();
+
+    $("#area").addClass("d-none");
+    $("#area").removeClass("d-flex");
 
     allAreaRecipes = await Recipes.getRecipesByArea(area_name);
     console.log(await allAreaRecipes);
@@ -364,6 +396,8 @@ async function getAllCategories() {
     console.log(await allRecipes);
     Recipes.displayMeals(allRecipes);
     $("#categories").hide();
+    $("#categories").removeClass("d-flex");
+    $("#categories").addClass("d-none");
     $("#meals").show();
     $(".col-md-3").click(async function (e) {
       allRecipes = "";

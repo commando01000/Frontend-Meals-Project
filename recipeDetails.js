@@ -70,8 +70,8 @@ export class RecipeDetails extends Display {
     return this;
   }
 
-  setNewMealDetails(meal) {
-    console.log(meal);
+   setNewMealDetails(meal) {
+    // console.log(meal);
     this.index = meal[0].idMeal;
     this.mealName = meal[0].strMeal;
     this.image = meal[0].strMealThumb;
