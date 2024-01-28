@@ -167,13 +167,13 @@ async function getAllAreas() {
       $("#meal-details").addClass("d-flex");
       $("#meal-details").addClass("animate__backInDown");
       
-      let my_recipe = await Recipes.getRecipesByDetailsByID(nextMeal_id);
+      let my_recipe = await Recipes.getRecipeByDetailsByID(nextMeal_id);
 
       console.log(await my_recipe[0].idMeal);
 
       let my_recipe_details = new RecipeDetails(-1);
 
-      my_recipe_details = my_recipe_details.setNewMealDetailsArea(await my_recipe);
+      my_recipe_details = my_recipe_details.setNewMealDetails(await my_recipe);
       my_recipe_details.displayMeal(my_recipe_details);
 
       console.log(await my_recipe);
@@ -278,7 +278,7 @@ async function getAllCategories() {
       $("#meal-details").removeClass("d-none");
       $("#meal-details").addClass("d-flex");
       $("#meal-details").addClass("animate__backInDown");
-      let recipee = await Recipes.getRecipesByDetailsByID(nextMeal_id);
+      let recipee = await Recipes.getRecipeByDetailsByID(nextMeal_id);
       // console.log(recipee);
       // console.log(recipee[0].idMeal);
       // console.log(recipee[0]);

@@ -70,7 +70,7 @@ export class RecipeDetails extends Display {
     return this;
   }
 
-  setNewMealDetailsArea(meal) {
+  setNewMealDetails(meal) {
     console.log(meal);
     this.index = meal[0].idMeal;
     this.mealName = meal[0].strMeal;

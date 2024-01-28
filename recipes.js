@@ -88,7 +88,7 @@ export class recipes extends Display {
     return responseData.meals;
   }
 
-  async getRecipesByDetailsByID(mealID) {
+  async getRecipeByDetailsByID(mealID) {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`,
       {
