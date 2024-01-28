@@ -164,7 +164,7 @@ async function getAllAreas() {
       var nextMeal_id = $(this).find(".meal").data("id");
       $("#meals").hide();
       $("#meal-details").removeClass("d-none");
-      $("#meal-details").addClass("d-flex");
+      $("#meal-details").addClass("d-flex");s
       $("#meal-details").addClass("animate__backInDown");
       
       let my_recipe = await Recipes.getRecipeByDetailsByID(nextMeal_id);
