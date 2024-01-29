@@ -234,8 +234,7 @@ async function displayAllIngredients() {
   AllIngredients = await ingredients.getAllIngredients();
   const limitedIngredients = await AllIngredients.slice(0, 20);
   AllIngredients = limitedIngredients;
-  // console.log(await AllIngredients);
-
+  console.log(await AllIngredients, "GGGGGG");
   ingredients.displayIngredients(await AllIngredients);
 
   $(".col-md-3").click(async function (e) {

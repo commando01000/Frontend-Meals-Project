@@ -181,6 +181,7 @@ export class Display {
 
   displayAllIngredients(ingredients) {
     const ingredientsSection = document.getElementById("ingredients");
+    ingredientsSection.innerHTML = "";
     const container = document.createElement("div");
     container.classList.add("container", "d-flex","text-white", "text-center");
     const row = document.createElement("div");
@@ -202,7 +203,6 @@ export class Display {
       col.appendChild(paragraph);
       row.appendChild(col);
     });
-
     container.appendChild(row);
     ingredientsSection.appendChild(container);
   }
