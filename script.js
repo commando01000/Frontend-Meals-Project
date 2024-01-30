@@ -40,7 +40,6 @@ $(".btn-close").click(function (e) {
     },
     400
   );
-  isSidebarOpen = !isSidebarOpen;
 });
 
 import { recipes } from "./recipes.js";
